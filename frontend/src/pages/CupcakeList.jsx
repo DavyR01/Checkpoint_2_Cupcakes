@@ -55,7 +55,7 @@ export default function CupcakeList() {
           Filter by{" "}
           <select onClick={() => getFilterCupcakes()} id="cupcake-select">
             {/* Step 4: add an option for each accessory */}
-
+            <option value="">---</option>
             {selectedCupcakes
               // .filter((item) => item.includes({item.url}))
               .map((item, index) => (
