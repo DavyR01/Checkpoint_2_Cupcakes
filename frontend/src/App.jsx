@@ -1,8 +1,10 @@
+/* eslint-disable import/no-unresolved */
 import { Routes, Route } from "react-router-dom";
 import NavBar from "@components/NavBar";
 import Home from "@pages/Home";
 import CupcakeList from "@pages/CupcakeList";
 import Instructions from "@pages/Instructions";
+import React from "react";
 
 import "./App.css";
 

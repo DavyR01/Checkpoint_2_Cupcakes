@@ -37,7 +37,6 @@ export default function Cupcake({ cupcake }) {
           </div>
         </div>
       </div>
-
       <div className="cupcake-name">{cupcake.name}</div>
     </div>
   );
