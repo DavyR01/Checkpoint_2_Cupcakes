@@ -10,22 +10,28 @@ export default function CupcakeList() {
   // Step 1: get all cupcakes
 
   const [allCupcakes, setAllCupcakes] = useState([]);
-  const [selectedCupcakes, setSelectedCupcakes] = useState([]);
   // const [filterCupCakes, setFilterCupcakes] = useState("");
 
   // I didn't use a useEffect but a button to display cupcakes
 
-  // useEffect(() => {
   const getAllCupcakes = () => {
     fetch("http://localhost:4000/cupcakes")
       .then((reponse) => reponse.json())
+      // .then((result) => console.warn(result))
       .then((result) => setAllCupcakes(result))
+      // liste de cupcakes contenus dans result
       .catch((err) => console(err));
     console.log("API de tous les cupCakes");
   };
-  // });
+
+  // useEffect(() => getAllCupcakes(), []);    Pareil que :
+  // useEffect(getAllCupcakes, []);
+
+  // Le tableau vide de dépendances dans le useEffect permet d'effectuer l'effet une fois au lancement du composant
 
   // Step 3: get all accessories
+
+  const [selectedCupcakes, setSelectedCupcakes] = useState([]);
 
   const getFilterCupcakes = () => {
     fetch("http://localhost:4000/accessories")
@@ -59,6 +65,7 @@ export default function CupcakeList() {
             {selectedCupcakes
               // .filter((item) => item.includes({item.url}))
               .map((item, index) => (
+                // Je donne un nom de variable item pour accéder aux objets de mon tableau
                 <option
                   // eslint-disable-next-line react/no-array-index-key
                   key={index}
@@ -81,16 +88,19 @@ export default function CupcakeList() {
       <button onClick={() => getAllCupcakes()}>Search Cupcakes</button>
       <ul className="cupcake-list" id="cupcake-list">
         {/* Step 2: repeat this block for each cupcake */}
-        <li className="cupcake-item">
-          {allCupcakes.map((elem, index) => (
+        {/* Dès qu'il y a un map, on met une key={index} systématiquement pour l'identifier */}
+        {allCupcakes.map((elem, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <li key={index} className="cupcake-item">
+            {/* L'élément index se place toujours sur l'élément au dessus du composant appelé */}
             <Cupcake
               cupcake={elem}
               // eslint-disable-next-line react/no-array-index-key
-              key={index}
+
               // handleSelectedCupcakes={handleSelectedCupcakes}
             />
-          ))}
-        </li>
+          </li>
+        ))}
         {/* end of block */}
       </ul>
     </>
